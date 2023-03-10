@@ -6,6 +6,7 @@ import css from 'components/Phonebook/phonebook.module.css';
 
 const ContactList = () => {
   const contacts = useSelector(getFilteredContacts);
+
   const dispatch = useDispatch();
 
   const onDeleteContact = idForDelete => {

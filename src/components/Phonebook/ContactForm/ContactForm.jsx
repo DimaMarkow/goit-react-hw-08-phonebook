@@ -8,7 +8,7 @@ import { getAllContacts } from 'redux/contacts/contacts-selectors';
 
 const INITIAL_STATE = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 const ContactForm = () => {
@@ -30,6 +30,8 @@ const ContactForm = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const data = state;
+    console.log(data);
+
     const normalizedName = data.name.toLowerCase();
     const isRepeatedContact = AllContacts.some(
       contact => contact.name.toLowerCase() === normalizedName
@@ -63,11 +65,11 @@ const ContactForm = () => {
           Number
           <input
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={state.phone}
+            value={state.number}
             onChange={handleChange}
           />
         </label>
