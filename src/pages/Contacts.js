@@ -1,12 +1,12 @@
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import Phonebook from 'components/Phonebook/Phonebook';
 
 export default function Contacts() {
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>Your contacts</title>
-      </Helmet>
+      </Helmet> */}
       <Phonebook />
     </>
   );
