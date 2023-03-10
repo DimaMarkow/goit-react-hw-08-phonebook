@@ -1,13 +1,15 @@
-// import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { isUserLogin } from 'redux/auth/auth-selectors';
 import { LoginForm } from 'components/LoginForm/LoginForm';
 
 export default function Login() {
+  const isLogin = useSelector(isUserLogin);
+
   return (
     <div>
-      {/* <Helmet>
-        <title>Login</title>
-      </Helmet> */}
-      <LoginForm />
+      {!isLogin && <LoginForm />}
+      {isLogin && <Navigate to="/contacts" />}
     </div>
   );
 }
