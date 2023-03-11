@@ -5,8 +5,8 @@ import { getUser } from 'redux/auth/auth-selectors';
 
 // import css from './navbar-user.module.css';
 
-const NavbarUser = () => {
-  const { name } = useSelector(getUser);
+const UserMenu = () => {
+  const { email } = useSelector(getUser);
 
   const dispatch = useDispatch();
 
@@ -16,9 +16,9 @@ const NavbarUser = () => {
 
   return (
     <div>
-      {name}, <button onClick={onLogout}>Logout</button>
+      {email}, <button onClick={onLogout}>Logout</button>
     </div>
   );
 };
 
-export default NavbarUser;
+export default UserMenu;
