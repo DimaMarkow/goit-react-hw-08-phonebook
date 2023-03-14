@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store, persistor } from 'redux/store';
 import 'modern-normalize';
 
+import LinearIndeterminate from 'services/LinearIndeterminate';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
 import { App } from 'components/App';
 import './index.css';
@@ -13,7 +14,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<LinearIndeterminate />} persistor={persistor}>
         <AuthLayout>
           <BrowserRouter>
             <App />

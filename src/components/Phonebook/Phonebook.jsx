@@ -1,14 +1,16 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Container } from '@mui/material';
 
 import { fetchContacts } from 'redux/contacts/operations';
+import LinearIndeterminate from 'services/LinearIndeterminate';
 
-import css from './phonebook.module.css';
+// import css from './phonebook.module.css';
 import ContactForm from 'components/Phonebook/ContactForm/ContactForm';
 import ContactList from 'components/Phonebook/ContactList/ContactList';
 import Filter from 'components/Phonebook/Filter/Filter';
-import Loader from 'components/Phonebook/Loader/Loader';
+// import Loader from 'components/Phonebook/Loader/Loader';
 
 import {
   getFilteredContacts,
@@ -29,13 +31,13 @@ const Phonebook = () => {
   const isContacts = Boolean(filteredContacts.length);
 
   return (
-    <div className={css.wrapper}>
+    <Container>
       <ContactForm />
       <Filter />
-      {isLoading && !error && <Loader />}
+      {isLoading && !error && <LinearIndeterminate />}
       {isContacts && <ContactList />}
       {!isContacts && !isLoading && <p>No contacts in the list</p>}
-    </div>
+    </Container>
   );
 };
 

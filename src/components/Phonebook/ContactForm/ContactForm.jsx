@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import css from 'components/Phonebook/phonebook.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { TextField, Box, Button, Typography } from '@mui/material';
 
+// import css from 'components/Phonebook/phonebook.module.css';
+import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
 
 import { getAllContacts } from 'redux/contacts/contacts-selectors';
@@ -30,7 +31,6 @@ const ContactForm = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const data = state;
-    console.log(data);
 
     const normalizedName = data.name.toLowerCase();
     const isRepeatedContact = AllContacts.some(
@@ -47,38 +47,87 @@ const ContactForm = () => {
 
   return (
     <>
-      <h2 className={css.title}>Phonebook</h2>
-      <form className={css.buttonWrapper} onSubmit={handleSubmit}>
-        <label className={css.text}>
-          Name
-          <input
+      <Typography
+        variant="h4"
+        component="h4"
+        sx={{
+          p: 1,
+        }}
+      >
+        Phonebook
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: 400 },
+        }}
+        onSubmit={handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
+        <div>
+          {' '}
+          <TextField
+            id="outlined-name-input"
+            label="name"
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={state.name}
             onChange={handleChange}
           />
-        </label>
-        <label className={css.text}>
-          Number
-          <input
-            type="tel"
+        </div>
+        <div>
+          <TextField
+            id="outlined-number-input"
+            label="tel number"
+            type="number"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             value={state.number}
             onChange={handleChange}
           />
-        </label>
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </form>
+        </div>
+        <Button type="submit"> Add contact</Button>
+      </Box>
     </>
   );
 };
 
 export default ContactForm;
+
+// return (
+//   <>
+//     <h2 className={css.title}>Phonebook</h2>
+//     <form className={css.buttonWrapper} onSubmit={handleSubmit}>
+//       <label className={css.text}>
+//         Name
+//         <input
+//           type="text"
+//           name="name"
+//           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+//           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+//           required
+//           value={state.name}
+//           onChange={handleChange}
+//         />
+//       </label>
+//       <label className={css.text}>
+//         Number
+//         <input
+//           type="tel"
+//           name="number"
+//           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+//           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+//           required
+//           value={state.number}
+//           onChange={handleChange}
+//         />
+//       </label>
+//       <button className={css.btn} type="submit">
+//         Add contact
+//       </button>
+//     </form>
+//   </>
+// );

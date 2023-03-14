@@ -1,7 +1,10 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import Navbar from 'components/Navbar/Navbar';
+// import Navbar from 'components/Navbar/Navbar';
+import Header from 'components/Navbar/Header';
+import LinearIndeterminate from 'services/LinearIndeterminate';
+
 import PrivateRoute from 'components/PrivateRoute';
 import RestrictedRoute from 'components/RestrictedRoute';
 import { current } from 'redux/auth/auth-operations';
@@ -19,8 +22,9 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<p>...loading</p>}>
-      <Navbar />
+    <Suspense fallback={<LinearIndeterminate />}>
+      {/* <Navbar /> */}
+      <Header />
       <Routes>
         <Route index element={<HomePage />} />
         <Route element={<PrivateRoute />}>
