@@ -1,13 +1,14 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 // import Navbar from 'components/Navbar/Navbar';
-import Header from 'components/Navbar/Header';
-import LinearIndeterminate from 'services/LinearIndeterminate';
+// import Header from 'components/Navbar/Header';
+// import LinearIndeterminate from 'services/LinearIndeterminate';
 
 import PrivateRoute from 'components/PrivateRoute';
 import RestrictedRoute from 'components/RestrictedRoute';
 import { current } from 'redux/auth/auth-operations';
+import SharedLayout from 'components/SharedLayout/SharedLayout';
 
 const HomePage = lazy(() => import('pages/Home'));
 const RegisterPage = lazy(() => import('pages/Register'));
@@ -22,10 +23,10 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<LinearIndeterminate />}>
-      {/* <Navbar /> */}
-      <Header />
-      <Routes>
+    // <Suspense fallback={<LinearIndeterminate />}>
+    // <Header />
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
         <Route index element={<HomePage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/contacts" element={<ContactsPage />} />
@@ -34,7 +35,8 @@ export const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
-      </Routes>
-    </Suspense>
+      </Route>
+    </Routes>
+    // </Suspense>
   );
 };
