@@ -1,10 +1,12 @@
 .form {
-  margin-left: 55px;
-  width: 320px;
+  /* margin-left: 55px; */
+  width: 400px;
 }
 
 .label {
+  display: block;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-top: 16px;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { TextField, Box, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
-// import css from 'components/Phonebook/phonebook.module.css';
+import css from 'components/Phonebook/ContactForm/ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
 
@@ -16,10 +16,6 @@ const ContactForm = () => {
   const [state, setState] = useState(INITIAL_STATE);
   const dispatch = useDispatch();
   const AllContacts = useSelector(getAllContacts);
-
-  const resetForm = () => {
-    setState(INITIAL_STATE);
-  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -42,7 +38,7 @@ const ContactForm = () => {
       return;
     }
     dispatch(addContact({ ...data }));
-    resetForm();
+    setState(INITIAL_STATE);
   };
 
   return (
@@ -56,7 +52,36 @@ const ContactForm = () => {
       >
         Phonebook
       </Typography>
-      <Box
+      <form className={css.form} onSubmit={handleSubmit}>
+        <label className={css.label}>
+          Name
+          <input
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            value={state.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label className={css.label}>
+          Number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={state.number}
+            onChange={handleChange}
+          />
+        </label>
+        <Button type="submit" sx={{ mt: 1 }}>
+          Add contact
+        </Button>
+      </form>
+      {/* <Box
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: 400 },
@@ -90,44 +115,9 @@ const ContactForm = () => {
           />
         </div>
         <Button type="submit"> Add contact</Button>
-      </Box>
+      </Box> */}
     </>
   );
 };
 
 export default ContactForm;
-
-// return (
-//   <>
-//     <h2 className={css.title}>Phonebook</h2>
-//     <form className={css.buttonWrapper} onSubmit={handleSubmit}>
-//       <label className={css.text}>
-//         Name
-//         <input
-//           type="text"
-//           name="name"
-//           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//           required
-//           value={state.name}
-//           onChange={handleChange}
-//         />
-//       </label>
-//       <label className={css.text}>
-//         Number
-//         <input
-//           type="tel"
-//           name="number"
-//           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//           required
-//           value={state.number}
-//           onChange={handleChange}
-//         />
-//       </label>
-//       <button className={css.btn} type="submit">
-//         Add contact
-//       </button>
-//     </form>
-//   </>
-// );
