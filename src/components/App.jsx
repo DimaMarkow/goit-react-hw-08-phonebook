@@ -1,6 +1,6 @@
 import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 // import Navbar from 'components/Navbar/Navbar';
 // import Header from 'components/Navbar/Header';
 // import LinearIndeterminate from 'services/LinearIndeterminate';
@@ -35,7 +35,7 @@ export const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
-        <Route path="*" element={<HomePage />} />
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Route>
     </Routes>
     // </Suspense>
